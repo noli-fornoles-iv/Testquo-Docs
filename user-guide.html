@@ -236,6 +236,33 @@
       font-size: 12px;
     }
     .chip strong { color: var(--text); font-weight: 650; }
+    .chip a {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 650;
+    }
+    .chip a:hover { text-decoration: underline; }
+    a.dl-link {
+      color: var(--cyan);
+      font-weight: 650;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    a.dl-link:hover { text-decoration: underline; }
+    pre.cmd {
+      margin: 10px 0 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--bg-inset);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.45;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
 
     /* —— Area themes (Start / Hub / Setup / Reference) —— */
     .nav-group[data-area="start"] a.active,
@@ -861,7 +888,7 @@
         <img class="brand-mark" src="logo.png" width="44" height="44" alt="" />
         <div>
           <div class="wordmark">Test<span>quo</span></div>
-          <p class="brand-tag">User Guide · 0.1.22</p>
+          <p class="brand-tag">User Guide · <span data-tq-version>0.0.1</span></p>
         </div>
       </div>
 
@@ -932,9 +959,10 @@
           </p>
           <div class="meta-row">
             <span class="chip"><strong>Product</strong> Testquo Desktop</span>
-            <span class="chip"><strong>Version</strong> 0.1.22</span>
+            <span class="chip"><strong>Version</strong> <span data-tq-version>0.0.1</span></span>
             <span class="chip"><strong>Audience</strong> QA engineers &amp; leads</span>
             <span class="chip"><strong>Platforms</strong> Windows &amp; macOS</span>
+            <span class="chip"><strong>Installers</strong> <a href="#quick-start">Windows &amp; macOS downloads</a></span>
           </div>
         </header>
 
@@ -1124,7 +1152,7 @@
           </div>
         </section>
 
-        <section class="doc area-start" id="quick-start" data-search="quick start bind new agent wizard project source connections agent rules bind project create clone attach playwright selenium cursor">
+        <section class="doc area-start" id="quick-start" data-search="quick start install download windows macos dmg exe xattr gatekeeper bind new agent wizard project source connections agent rules bind project create clone attach playwright selenium cursor">
           <header class="sec-head">
             <span class="sec-badge">Start here</span>
             <h2>Quick start</h2>
@@ -1140,13 +1168,63 @@
             <strong>Fresh start:</strong> click <strong>Bind New Agent →</strong> and walk the left rail below.
           </div>
 
+          <h3>Download installers</h3>
+          <p>
+            Current release <strong>v<span data-tq-version>0.0.1</span></strong> from
+            <a href="https://github.com/outliant/ai-agent-testquo/releases" data-tq-releases-page>outliant/ai-agent-testquo</a>
+            (sign in to GitHub if the release repo is private). Links update when the guide is republished with a new app version.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>Installer</th>
+                <th>Download</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Windows</strong></td>
+                <td><code data-tq-file="win">Testquo-Setup-0.0.1.exe</code></td>
+                <td><a class="dl-link" data-tq-asset="win" href="https://github.com/outliant/ai-agent-testquo/releases/download/v0.0.1/Testquo-Setup-0.0.1.exe">Download .exe</a></td>
+              </tr>
+              <tr>
+                <td><strong>macOS</strong> (Apple Silicon)</td>
+                <td><code data-tq-file="mac-arm64">Testquo-0.0.1-mac-arm64.dmg</code></td>
+                <td><a class="dl-link" data-tq-asset="mac-arm64" href="https://github.com/outliant/ai-agent-testquo/releases/download/v0.0.1/Testquo-0.0.1-mac-arm64.dmg">Download .dmg</a></td>
+              </tr>
+              <tr>
+                <td><strong>macOS</strong> (Intel)</td>
+                <td><code data-tq-file="mac-x64">Testquo-0.0.1-mac-x64.dmg</code></td>
+                <td><a class="dl-link" data-tq-asset="mac-x64" href="https://github.com/outliant/ai-agent-testquo/releases/download/v0.0.1/Testquo-0.0.1-mac-x64.dmg">Download .dmg</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="tip">
+            Unsigned builds may show SmartScreen (Windows) or Gatekeeper (macOS) warnings — expected until packages are signed/notarized.
+            Prefer the DMG that matches your Mac chip (Apple menu → About This Mac).
+          </div>
+
+          <h3>Install on Windows</h3>
           <ol class="steps">
+            <li>Download <code data-tq-file="win">Testquo-Setup-0.0.1.exe</code> and run it.</li>
+            <li>If SmartScreen appears, choose <strong>More info</strong> → <strong>Run anyway</strong> (unsigned builds).</li>
+            <li>Finish the installer, then open <strong>Testquo</strong> from the Start menu or desktop shortcut.</li>
+          </ol>
+
+          <h3>Install on macOS</h3>
+          <ol class="steps">
+            <li>Download the matching DMG (<code data-tq-file="mac-arm64">Testquo-0.0.1-mac-arm64.dmg</code> or <code data-tq-file="mac-x64">Testquo-0.0.1-mac-x64.dmg</code>) and open it.</li>
+            <li>Drag <strong>Testquo</strong> into <strong>Applications</strong>.</li>
             <li>
-              <strong>Install &amp; open Testquo</strong><br />
-              From the GitHub release, install Windows (<code>Testquo-Setup-&lt;version&gt;.exe</code>) or macOS (DMG for Apple Silicon or Intel).
-              Unsigned builds may show SmartScreen or Gatekeeper warnings — expected for unsigned packages.
-              You need Node.js 20+ only if you will scaffold a new suite here; Git is needed to clone or push.
+              Clear the quarantine flag (needed for unsigned builds when macOS blocks the app). In Terminal:
+              <pre class="cmd">sudo xattr -cr "/Applications/Testquo.app"</pre>
             </li>
+            <li>Open <strong>Testquo</strong> from Applications. If Gatekeeper still warns, use <strong>Open</strong> from the right-click menu once.</li>
+          </ol>
+
+          <h3>After install</h3>
+          <ol class="steps">
             <li>
               <strong>Start Bind New Agent</strong><br />
               On welcome, click <strong>Bind New Agent →</strong>. The left rail is exactly four steps:
@@ -1209,24 +1287,49 @@
             <tbody>
               <tr><td><strong>Product name</strong></td><td>Testquo Desktop</td></tr>
               <tr><td><strong>Package / app id</strong></td><td><code>testquo-desktop</code> · <code>com.testquo.desktop</code></td></tr>
-              <tr><td><strong>Guide version</strong></td><td>Aligned with app <strong>0.1.22</strong> (see also Settings → App updates on packaged builds)</td></tr>
+              <tr><td><strong>Guide version</strong></td><td>Aligned with app <strong data-tq-version>0.0.1</strong> (see also Settings → App updates on packaged builds)</td></tr>
               <tr><td><strong>App type</strong></td><td>Desktop app (Electron) with a React UI</td></tr>
               <tr><td><strong>What it binds</strong></td><td>One Cursor AI agent to one local automation project folder per window</td></tr>
             </tbody>
           </table>
 
           <h3>Supported platforms &amp; installers</h3>
+          <p>
+            Download the current release from the <a href="#quick-start">Quick start</a> table, or open
+            <a href="https://github.com/outliant/ai-agent-testquo/releases" data-tq-releases-page>outliant/ai-agent-testquo releases</a>.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Platform</th><th>Installer</th><th>Download</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Windows</strong></td>
+                <td><code data-tq-file="win">Testquo-Setup-0.0.1.exe</code></td>
+                <td><a class="dl-link" data-tq-asset="win" href="https://github.com/outliant/ai-agent-testquo/releases/download/v0.0.1/Testquo-Setup-0.0.1.exe">Download .exe</a></td>
+              </tr>
+              <tr>
+                <td><strong>macOS</strong> (Apple Silicon)</td>
+                <td><code data-tq-file="mac-arm64">Testquo-0.0.1-mac-arm64.dmg</code></td>
+                <td><a class="dl-link" data-tq-asset="mac-arm64" href="https://github.com/outliant/ai-agent-testquo/releases/download/v0.0.1/Testquo-0.0.1-mac-arm64.dmg">Download .dmg</a></td>
+              </tr>
+              <tr>
+                <td><strong>macOS</strong> (Intel)</td>
+                <td><code data-tq-file="mac-x64">Testquo-0.0.1-mac-x64.dmg</code></td>
+                <td><a class="dl-link" data-tq-asset="mac-x64" href="https://github.com/outliant/ai-agent-testquo/releases/download/v0.0.1/Testquo-0.0.1-mac-x64.dmg">Download .dmg</a></td>
+              </tr>
+            </tbody>
+          </table>
           <table>
             <thead>
               <tr><th>Topic</th><th>Details</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>Platforms</strong></td><td>Windows and macOS (Apple Silicon and Intel). Paths, shells, and auto-update feeds are platform-aware.</td></tr>
-              <tr><td><strong>Windows installer</strong></td><td><code>Testquo-Setup-&lt;version&gt;.exe</code> (also a portable unpacked <code>Testquo.exe</code> when built)</td></tr>
-              <tr><td><strong>macOS installer</strong></td><td><code>Testquo-&lt;version&gt;-mac-arm64.dmg</code> and <code>…-mac-x64.dmg</code>, plus zip artifacts for in-app update</td></tr>
+              <tr><td><strong>Release feed</strong></td><td><code>outliant/ai-agent-testquo</code> (same repo the packaged app uses for Settings → App updates)</td></tr>
+              <tr><td><strong>macOS first open</strong></td><td>After copying to Applications, run <code>sudo xattr -cr "/Applications/Testquo.app"</code> for unsigned builds</td></tr>
               <tr><td><strong>Signing</strong></td><td>Unsigned builds may show SmartScreen (Windows) or Gatekeeper (macOS) warnings — expected until signed/notarized packages are published</td></tr>
               <tr><td><strong>App updates</strong></td><td>Packaged installs: Settings → <strong>App updates</strong> (check / download / restart). Not available when running from source via <code>npm run dev</code></td></tr>
-              <tr><td><strong>This user guide</strong></td><td>Ships on GitHub releases as <code>Testquo-User-Guide.zip</code> (HTML + screenshots) next to the installers</td></tr>
+              <tr><td><strong>This user guide</strong></td><td>Live at Testquo-Docs; also ships on each release as <code>Testquo-User-Guide.zip</code> next to the installers</td></tr>
             </tbody>
           </table>
 
@@ -3346,7 +3449,7 @@
             <div class="topic-path"><span class="crumb">Settings</span><span class="sep">›</span><span class="here">App updates</span></div>
             <h3>App updates</h3>
             <figure class="shot">
-            <img src="screenshots/view-settings-app-updates.png" alt="App updates — Check for updates Version 0.1.22" width="1600" height="900" loading="lazy" />
+            <img src="screenshots/view-settings-app-updates.png" alt="App updates — Check for updates Version 0.0.1" width="1600" height="900" loading="lazy" />
             <figcaption><strong class="belongs">Settings</strong> App updates — this install version and Check for updates (packaged app only).</figcaption>
           </figure>
           <p>
@@ -3355,7 +3458,7 @@
           </p>
           <ol class="steps">
             <li>Open Settings → <strong>App updates</strong>.</li>
-            <li>Read <strong>This install</strong> version (for example Version 0.1.22).</li>
+            <li>Read <strong>This install</strong> version (for example Version 0.0.1).</li>
             <li>Click <strong>Check for updates</strong>. If one is available, follow the prompt to download / restart.</li>
           </ol>
           <div class="tip">
@@ -3771,7 +3874,7 @@ Promote through UAT / PROD only when your project workflow requires it — never
               <tr>
                 <td>Version chip</td>
                 <td>Hero / footer in the HTML + <code>package.json</code></td>
-                <td>Every release (match app version, e.g. 0.1.22)</td>
+                <td>Every release (match app version, e.g. 0.0.1)</td>
               </tr>
               <tr>
                 <td>Release zip</td>
@@ -3807,7 +3910,7 @@ Promote through UAT / PROD only when your project workflow requires it — never
 
           <h3>Before you ship a release</h3>
           <ul>
-            <li>Bump the hero / footer version to match <code>package.json</code>.</li>
+            <li>Bump <code>package.json</code> version — <code>publish-docs.yml</code> rewrites installer links and version chips from that value.</li>
             <li>Search the guide for removed button labels or old product names.</li>
             <li>Confirm Integration still shows the <strong>Coming soon</strong> badge until that feature ships.</li>
             <li>Confirm Testplans still shows <strong>In Progress</strong> until that Hub tab is fully shipped.</li>
@@ -3822,7 +3925,7 @@ Promote through UAT / PROD only when your project workflow requires it — never
 
         <footer class="footer">
           <p>
-            Testquo Desktop · User Guide · aligned with app version 0.1.22 ·
+            Testquo Desktop · User Guide · aligned with app version <span data-tq-version>0.0.1</span> ·
             <a href="#top">Back to top</a>
           </p>
         </footer>
@@ -3830,6 +3933,9 @@ Promote through UAT / PROD only when your project workflow requires it — never
     </main>
   </div>
 
+  <script type="application/json" id="testquo-release">
+    {"version":"0.0.1","owner":"outliant","repo":"ai-agent-testquo"}
+  </script>
   <script>
     (function () {
       var search = document.getElementById("guideSearch");
@@ -3840,6 +3946,49 @@ Promote through UAT / PROD only when your project workflow requires it — never
       function normalize(s) {
         return (s || "").toLowerCase();
       }
+
+      function applyReleaseMeta() {
+        var el = document.getElementById("testquo-release");
+        if (!el) return;
+        var meta;
+        try {
+          meta = JSON.parse(el.textContent);
+        } catch (err) {
+          return;
+        }
+        var version = String(meta.version || "").trim();
+        var owner = String(meta.owner || "outliant").trim();
+        var repo = String(meta.repo || "ai-agent-testquo").trim();
+        if (!version) return;
+
+        var base = "https://github.com/" + owner + "/" + repo + "/releases";
+        var tag = "v" + version;
+        var files = {
+          win: "Testquo-Setup-" + version + ".exe",
+          "mac-arm64": "Testquo-" + version + "-mac-arm64.dmg",
+          "mac-x64": "Testquo-" + version + "-mac-x64.dmg"
+        };
+
+        document.querySelectorAll("[data-tq-version]").forEach(function (node) {
+          node.textContent = version;
+        });
+        document.querySelectorAll("[data-tq-releases-page]").forEach(function (node) {
+          node.setAttribute("href", base);
+        });
+        Object.keys(files).forEach(function (key) {
+          var name = files[key];
+          var href = base + "/download/" + tag + "/" + encodeURIComponent(name);
+          document.querySelectorAll('[data-tq-file="' + key + '"]').forEach(function (node) {
+            node.textContent = name;
+          });
+          document.querySelectorAll('[data-tq-asset="' + key + '"]').forEach(function (node) {
+            node.setAttribute("href", href);
+          });
+        });
+        document.title = "Testquo User Guide · " + version;
+      }
+
+      applyReleaseMeta();
 
       if (search) {
         search.addEventListener("input", function () {
